@@ -2,10 +2,13 @@ package com.example.demo.DTO;
 
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class TaskDTO {
     @NotBlank(message = "Title is required")
     private String title;
+
+    @Size(min = 5, message = "Description must be at least 5 characters")
     private String description;
     private boolean completed;
 

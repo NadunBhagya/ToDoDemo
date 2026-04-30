@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -50,15 +50,8 @@ public class TaskController {
                 : "Task not found";
     }
 
-    // ✅ PUT (using DTO)
     @PutMapping("/{id}")
-    public String updateTask(@PathVariable int id, @Valid @RequestBody TaskDTO taskDTO) {
-
-        Task task = new Task();
-        task.setTitle(taskDTO.getTitle());
-        task.setDescription(taskDTO.getDescription());
-        task.setCompleted(taskDTO.isCompleted());
-
+    public String updateTask(@PathVariable int id, @RequestBody Task task) {
         return taskService.updateTask(id, task)
                 ? "Task updated"
                 : "Task not found";
